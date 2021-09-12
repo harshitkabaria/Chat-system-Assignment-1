@@ -1,7 +1,7 @@
 
 
 <!-- Toolbar -->
-<div class="toolbar" role="">
+<div class="toolbar" role="" *ngIf="isLoggedin">
  <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <!-- Container wrapper -->
@@ -35,23 +35,24 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Let's Chat</a>
+          <a class="nav-link" routerLink="/chat">Let's Chat</a>
         </li>
       </ul>
       <!-- Left links -->
 
       <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-link px-3 me-2" routerLink="/login">
-          Log In
+
+        <button type="button" (click)="logout()" class="btn btn-link px-3 me-2" *ngIf="isLoggedin">
+           Logout
         </button>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
            Admin
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" routerLink="/login">Add User</a></li>
-            <li><a class="dropdown-item" href="#">Add group</a></li>
-            <li><a class="dropdown-item" href="#">Add channel</a></li>
+            <li><a class="dropdown-item" routerLink="/addUser">Add User</a></li>
+            <li><a class="dropdown-item" routerLink="/addGroup">Add group</a></li>
+            <li><a class="dropdown-item" routerLink="/addChannel">Add channel</a></li>
           </ul>
         </div>
       

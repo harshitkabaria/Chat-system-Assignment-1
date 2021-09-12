@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';// ES6 import or TypeScript
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { ToastrService } from 'ngx-toastr';
 
 // CommonJS
 
@@ -18,14 +19,16 @@ export class LoginComponent implements OnInit {
 //  password: string = "";
   role: string = '';
 
-   constructor(private router: Router, private http: HttpClient) { }
+   constructor(private router: Router, private http: HttpClient, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    console.log(sessionStorage);
-		// if (sessionStorage.getItem("username") != null) {
-		// 	alert("You are already logged in!")
-		// //	this.router.navigateByUrl('/chat');
-		// }
+    console.log(localStorage);
+		if (localStorage.getItem('user') != null) {
+				this.router.navigateByUrl('/dashboard');
+		}
+    else{
+      this.router.navigateByUrl('/login');
+    }
     
   }
  
@@ -40,13 +43,16 @@ public login(): void{
       })
       .subscribe((data: any) => {
           if (data.success) {
-            alert("Login Successful!");
-           // this.router.navigateByUrl('/chat');
-            sessionStorage.setItem("username", data.username);
-            sessionStorage.setItem("email", data.email);
-            sessionStorage.setItem("role", data.role);
+         //   alert("Login Successful!");
+            console.log("loginpage",data)
+            localStorage.setItem('user', JSON.stringify(data));
+            
+            this.router.navigateByUrl('/dashboard');
+            window.location.reload();
+            this.toastr.success(`Login Successful!!`, '');
+            //window.location.reload();
           } else {
-            alert('Username/Email incorrect!')
+            this.toastr.error('Username incorrect!', '');
           }
         },
         () => {

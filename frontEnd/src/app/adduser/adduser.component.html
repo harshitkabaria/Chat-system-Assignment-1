@@ -25,9 +25,11 @@
                                         <div class="col-12">
                                         <label>Role<span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                        <select [(ngModel)]="role" class="form-control" name="role">
+                                        <select [(ngModel)]="role" class="form-control bootstrap-select" name="role">
+                                          <option value="" selected disabled>Select User Role</option>
                                           <option value="user">User</option>
                                           <option value="groupAdmin">Group Admin</option>
+                                          <option value="groupAssist">Group Assist</option>
                                           <option value="superAdmin">Super Admin</option>
                                         </select>
                                         </div>
