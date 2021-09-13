@@ -1,0 +1,84 @@
+
+
+<!-- Toolbar -->
+<div class="toolbar" role="" *ngIf="isLoggedin">
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand me-2" routerLink="/dashboard">
+      <img
+        src="../assets/logo.png"
+        height="30"
+        alt=""
+        loading="lazy"
+        style="margin-top: -1px;"
+      />
+    </a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/chat">Let's Chat</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+
+      <div class="d-flex align-items-center">
+
+      
+        <button type="button" routerLink="/addUser" class="btn px-3 me-2" *ngIf="isSuperAdmin" style="cursor: pointer;">
+          Add User
+       </button>
+      
+          <button class="btn px-3 me-2 " type="button" routerLink="/dashboard" style="cursor: pointer;">
+           Admin Dashboard
+          </button>
+          
+      
+
+        <button type="button" (click)="logout()" class="btn px-3 me-2" *ngIf="isLoggedin" style="cursor: pointer;">
+          Logout
+       </button>
+      
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+  
+</div>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+  </div>
+  <!-- Footer -->
+  <footer class="text-center">    
+    Harshit Kabaria © 2021
+  </footer>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
