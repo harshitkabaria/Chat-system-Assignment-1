@@ -1,1 +1,1 @@
-[{"id":1,"group":2,"name":"asda","users":[1,2,3,4]},{"id":2,"group":2,"name":"zsdsd","users":[1,2,3,4]}]
+[{"id":1,"group":1,"name":"Channel 1","users":[1,2,3,4]},{"id":2,"group":2,"name":"Channel 2","users":[1,2,3,4]},{"id":3,"group":2,"name":"Channel 3","user":[]},{"id":4,"group":1,"name":"ASDASD","user":[]},{"id":5,"group":1,"name":"HRK","user":[]},{"id":6,"group":2,"name":"sdfs","user":[]}]

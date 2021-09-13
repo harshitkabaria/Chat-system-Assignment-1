@@ -56,10 +56,10 @@ app.post('/api/auth', (req, res) => {
 			userObj = JSON.parse(data);
 			for (let i = 0; i < userObj.length; i++) {
 				if (userObj[i].name == uname) {
-					for (let k = 0; k < userObj.length; k++) {
-						
-							urole = userObj[k].role;
-							uId=userObj[k].id;
+						console.log(userObj);
+							urole = userObj[i].role;
+							console.log("urole",urole);
+							uId=userObj[i].id;
 							res.send({
 								'id':uId,
 								'username': uname,
@@ -70,7 +70,7 @@ app.post('/api/auth', (req, res) => {
 							console.log(urole);
 							return;
 						
-					}
+					
 				}
 			}
 			res.send({
@@ -190,7 +190,7 @@ app.post('/api/addGroup', (req, res) => {
 });
 
 app.post('/api/groups', (req, res) => {
-	const group = {
+	const group = { 
 	  id: groups.length + 1,
 	  name: req.body.name,
 	  channels: [],
