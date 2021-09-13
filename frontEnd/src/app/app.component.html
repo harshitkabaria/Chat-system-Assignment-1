@@ -43,7 +43,7 @@
       <div class="d-flex align-items-center">
 
       
-        <button type="button" routerLink="/addUser" class="btn px-3 me-2" *ngIf="isLoggedin" style="cursor: pointer;">
+        <button type="button" routerLink="/addUser" class="btn px-3 me-2" *ngIf="isSuperAdmin" style="cursor: pointer;">
           Add User
        </button>
       
@@ -70,8 +70,8 @@
   <router-outlet></router-outlet>
   </div>
   <!-- Footer -->
-  <footer>    
-    HRK © 2021
+  <footer class="text-center">    
+    Harshit Kabaria © 2021
   </footer>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

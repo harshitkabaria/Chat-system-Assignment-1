@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-adduser',
   templateUrl: './adduser.component.html',
@@ -9,7 +11,7 @@ import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 })
 export class AdduserComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private toastr: ToastrService) { }
   loginUsername: string = '';
 	email: string = '';
 	role: string = '';
@@ -20,7 +22,7 @@ export class AdduserComponent implements OnInit {
 	users = [{}];
 
   ngOnInit(): void {
-
+  
 
 }
 
@@ -37,8 +39,8 @@ export class AdduserComponent implements OnInit {
 						role: this.role
 					})
 					.subscribe((data: any) => {
-							if (data.success) {
-								alert('User created successfully!');
+							if (data.success) {								
+      this.toastr.success(`User created successfully`, '');
 								this.loginUsername = '';
 								this.email = '';
 								this.role = '';
@@ -48,6 +50,7 @@ export class AdduserComponent implements OnInit {
 												console.log('data', data.userData);
 												this.users = data.userData;
 												console.log('thisusers', this.users);
+
 											} else {
 												alert('Error!');
 												return;

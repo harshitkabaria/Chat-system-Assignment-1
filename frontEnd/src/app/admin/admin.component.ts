@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import remove from 'lodash/remove';uusee
-// import Group from '../models/group';
 import {Router} from '@angular/router';
 import Users from '../models/users';
 import { HttpClient } from '@angular/common/http';
-// import remove from 'lodash/remove';
+//import remove from 'lodash/remove';
 import Group from '../models/groups';
 import { ToastrService } from 'ngx-toastr';
 const serverURL = "http://localhost:3000/";
@@ -50,7 +48,7 @@ export class AdminComponent implements OnInit {
 
   addUserToChannelModal = {
     channelId: null,
-    userId: [],
+    userId: [{}],
     addToChannelGroupUsers:[],
     addToChannelChannels: [{}],
   } || [];
@@ -64,14 +62,13 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = localStorage.getItem('user');
-    //this.user = JSON.parse(a);
     console.log("dashboard",this.user);
     this.getMyGroups();
     this.getAllUsers();
     this.getAllGroups();
     this.getAllChannels();
     this.isSuperAdmin();
-    debugger
+  
   }
   logout() {
     localStorage.removeItem('user');
@@ -81,10 +78,11 @@ export class AdminComponent implements OnInit {
   isSuperAdmin() {
     
     if( userdata.role == 4){
-      this.isthisSuperAdmin == true;
+      debugger;
+      this.isthisSuperAdmin = true;
     }
     else{
-      this.isthisSuperAdmin == false;
+      this.isthisSuperAdmin = false;
     }
   }
 
@@ -149,8 +147,10 @@ export class AdminComponent implements OnInit {
       this.createChannelModal.groupId = group.id;
       console.log(this.createChannelModal);
     } else if (type === 'addUserToChannel') {
+      
       this.addUserToChannelModal.addToChannelChannels = this.channels.filter((item: { group: any; }) => item.group === group.id);
-      this.addUserToChannelModal.addToChannelChannels = [...this.users.use];
+      debugger
+     this.addUserToChannelModal.userId = [...this.users.userData];
     } else if (type === 'removeUserFromChannel') {
       this.removeUserToChannelModal.removeToChannelChannels = this.channels.filter((item: { group: any; }) => item.group === group.id);
     } else if (type === 'inviteUserToChannel') {
@@ -284,13 +284,13 @@ export class AdminComponent implements OnInit {
   }
 
   removeUser(user: Users) {
-    this.httpClient.delete(serverURL+`/api/users/${user.id}`).subscribe(data => {
-     // remove(this.users, item => item.id === user.id);
+    this.httpClient.delete(serverURL+`api/users/${user.id}`).subscribe(data => {
+      this.toastr.success(`User has been Removed`);
     });
   }
 
   makeGroupAdmin(user: any) {
-    this.httpClient.put(serverURL+`/api/users/${user.id}`, {
+    this.httpClient.put(serverURL+`api/users/${user.id}`, {
       role: 3,
     }).subscribe(data => {
       this.users[user.id - 1] = data;
@@ -299,7 +299,7 @@ export class AdminComponent implements OnInit {
   }
 
   makeSuperAdmin(user: any) {
-    this.httpClient.put(serverURL+`/api/users/${user.id}`, {
+    this.httpClient.put(serverURL+`api/users/${user.id}`, {
       role: 4,
     }).subscribe(data => {
       this.users[user.id - 1] = data;

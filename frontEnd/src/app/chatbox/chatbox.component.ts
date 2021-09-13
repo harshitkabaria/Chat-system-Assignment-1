@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DEFAULT_CURRENCY_CODE, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
@@ -54,10 +54,11 @@ export class ChatboxComponent implements OnInit {
         
         this.groups = data;
         let jLoggedinUser = JSON.parse(this.loggedInUser);
-        console.log(this.groups);
+        console.log("chAT",this.groups);
         for(let i=0;i<this.groups.length;i++){
+          debugger;
           
-          for(let j=0;j<=this.groups[i].users.length;i++){
+          for(let j=0;j<=this.groups[i].users.length;j++){
             
             if(this.groups[i].users[j] == jLoggedinUser.id){
               this.regGroupObj.push(this.groups[i]);
@@ -79,11 +80,11 @@ export class ChatboxComponent implements OnInit {
       public selectBasedOngroups(groupId:any){
         
         this.httpClient.get(serverURL+'api/channels').subscribe(data => {
-           ;
           this.channel = data;
+          debugger
           console.log("this.channel",this.channel)
-          for(let i=0;i<=this.channel.length;i++ ){
-             ;
+          for(let i=0;i<this.channel.length;i++ ){
+            debugger;
             if(groupId == this.channel[i].group){
               this.regchannelObj.push(this.channel[i]);
                

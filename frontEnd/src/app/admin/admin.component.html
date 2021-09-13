@@ -28,7 +28,7 @@
     </mat-tab>
     <!-- group admin role  -->
       <mat-tab *ngIf="isGroupAdmin()" label="Create Group">
-      <form class="tab-form"> {{isthisSuperAdmin}}
+      <form class="tab-form">
         <mat-form-field>
           <label>
             <input matInput placeholder="Group Name" class="form-control" [(ngModel)]="createGroupModal.name" name="name">
@@ -43,33 +43,7 @@
         <button mat-raised-button color="warn" (click)="removeGroup(group)" style="width: auto;">remove</button>
       </div>
     </mat-tab>
-   <mat-tab *ngIf="isGroupAdmin()" label="Invite User to channel">
-       <form class="tab-form">
-        <mat-label class="blank">Select Group</mat-label>
-        <mat-select class="blank">
-          <mat-option *ngFor="let group of groups" [value]="group.name" (onSelectionChange)="onGroupSelectChange('inviteUserToChannel', group)">
-            {{group.name}}
-          </mat-option>
-        </mat-select>
-        <mat-label class="blank">Select Channel</mat-label>
-        <mat-select class="blank">
-          <mat-option *ngFor="let channel of inviteUserToChannelModel.channels" [value]="channel.name" (onSelectionChange)="onChannelSelectChange('inviteUserToChannel', channel)">
-            {{channel.name}}
-          </mat-option>
-        </mat-select>
-        <mat-form-field>
-          <label>
-            <input matInput placeholder="username" [(ngModel)]="inviteUserToChannelModel.name" name="name">
-          </label>
-        </mat-form-field>
-        <mat-form-field>
-          <label>
-            <input matInput placeholder="email" [(ngModel)]="inviteUserToChannelModel.email" name="email">
-          </label>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="inviteUserToChannel()">Invite User To Channel</button>
-      </form> 
-    </mat-tab>
+
     <mat-tab *ngIf="isGroupAdmin()" label="Add Group Assis">
       <div *ngFor="let user of a" class="row">
         <p>{{user.name}}</p>
@@ -112,7 +86,7 @@
         </mat-select>
         <mat-label class="blank">Select User</mat-label>
         <mat-select class="blank">
-          <mat-option *ngFor="let user of addUserToChannelModal.addToChannelGroupUsers" [value]="user.name" (onSelectionChange)="onUserSelectChange('addUserToChannel', user)">
+          <mat-option *ngFor="let user of addUserToChannelModal.userId" [value]="user.name" (onSelectionChange)="onUserSelectChange('addUserToChannel', user)">
             {{user.name}}
           </mat-option>
         </mat-select>
