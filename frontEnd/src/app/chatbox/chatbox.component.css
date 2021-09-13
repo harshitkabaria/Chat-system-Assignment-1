@@ -136,7 +136,6 @@ img{ max-width:100%;}
 .msg_send_btn {
   background: #05728f none repeat scroll 0 0;
   border: medium none;
-  border-radius: 50%;
   color: #fff;
   cursor: pointer;
   font-size: 17px;
@@ -144,10 +143,34 @@ img{ max-width:100%;}
   position: absolute;
   right: 0;
   top: 11px;
-  width: 33px;
+  width: auto;
 }
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
   height: 516px;
   overflow-y: auto;
 }
+
+
+
+.messageChat{
+  background-color: #ccc;
+  width: auto;
+  border-radius: 15px;
+  padding: 11px;
+}
+
+
+
+#messages {
+  /* background-color: #ff9000; */
+  display: inline-block;
+  opacity: 0.85;
+}
+
+#chat {
+  background-color: #5883ad;
+  display: inline-block;
+  padding: 10px;
+  opacity: 1;
+}                                         

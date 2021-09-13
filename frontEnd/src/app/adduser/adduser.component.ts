@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 
 @Component({
   selector: 'app-adduser',
@@ -13,18 +13,15 @@ export class AdduserComponent implements OnInit {
   loginUsername: string = '';
 	email: string = '';
 	role: string = '';
+	user:any;
+	isthisSuperAdmin:any;
 
 	//deletedUser: string;
 	users = [{}];
 
   ngOnInit(): void {
-  //   if (!sessionStorage.loginUsername) {
-	// 		alert("You are not logged in!")
-	// 		this.router.navigateByUrl('/login');
-	// 	} else if (sessionStorage.role != "superAdmin" && sessionStorage.role != "groupAdmin") {
-	// 		alert("You do not have administrative privileges to access this!")
-	// 		this.router.navigateByUrl('/chat');
-  // }
+
+
 }
 
   public addUser(): void {

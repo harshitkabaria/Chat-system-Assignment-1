@@ -29,6 +29,8 @@ export class AdminComponent implements OnInit {
 
   channels :any =[];
 
+  isthisSuperAdmin: boolean = false ;
+
   createGroupModal = {
     name: '',
   };
@@ -68,6 +70,8 @@ export class AdminComponent implements OnInit {
     this.getAllUsers();
     this.getAllGroups();
     this.getAllChannels();
+    this.isSuperAdmin();
+    debugger
   }
   logout() {
     localStorage.removeItem('user');
@@ -76,7 +80,12 @@ export class AdminComponent implements OnInit {
 
   isSuperAdmin() {
     
-    return userdata.role && userdata.role > 3;
+    if( userdata.role == 4){
+      this.isthisSuperAdmin == true;
+    }
+    else{
+      this.isthisSuperAdmin == false;
+    }
   }
 
   isGroupAdmin() {
@@ -95,7 +104,7 @@ export class AdminComponent implements OnInit {
   getAllGroups() {
     
     this.httpClient.get(serverURL+'api/groups').subscribe(data => {
-      debugger;
+       ;
       this.groups = data;
     }, error => {
 
@@ -105,7 +114,7 @@ export class AdminComponent implements OnInit {
   getAllUsers() {
     
     this.httpClient.get(serverURL+'api/getAllUsers').subscribe(data => {this.users = data
-      debugger;
+       ;
       this.a=this.users.userData;
     console.log("all users",this.users.userData);
     }, error => {
@@ -115,7 +124,7 @@ export class AdminComponent implements OnInit {
 
   getAllChannels() {
     this.httpClient.get(serverURL+'api/channels').subscribe(data => {
-      debugger;
+       ;
       this.channels = data;
     }, error => {
 
@@ -145,18 +154,18 @@ export class AdminComponent implements OnInit {
     } else if (type === 'removeUserFromChannel') {
       this.removeUserToChannelModal.removeToChannelChannels = this.channels.filter((item: { group: any; }) => item.group === group.id);
     } else if (type === 'inviteUserToChannel') {
-      debugger;
+       ;
       this.inviteUserToChannelModel.channels = this.channels.filter((item: { group: any; }) => item.group === group.id);
     }
   }
 
   onChannelSelectChange(type:any, channel:any) {
     if (type === 'removeUserFromChannel') {
-      debugger;
+       ;
       this.removeUserToChannelModal.removeToChannelGroupUsers = channel.users.map((item: number) => this.users.userData[item - 1]);
       this.removeUserToChannelModal.channelId = channel.id;
     }  else if (type === 'inviteUserToChannel') {
-      debugger;
+       ;
       this.inviteUserToChannelModel.channel = channel;
     } else {
       this.addUserToChannelModal.channelId = channel.id;
@@ -191,7 +200,7 @@ export class AdminComponent implements OnInit {
 
   removeGroup(group:any) {
     console.log(group);
-    debugger
+     
     this.httpClient.delete(serverURL+`api/groups/${group.id}`).subscribe(data => {
      // alert(this.groups, item => item.id === group.id);
       this.toastr.success(`Group has been removed`, '');
@@ -229,7 +238,7 @@ export class AdminComponent implements OnInit {
 
   createChannel() {
     console.log(this.createChannelModal);
-    debugger
+     
     if (this.createChannelModal.name && this.createChannelModal.groupId) {
       this.channels.push({
         id: this.channels.length + 1,
@@ -238,23 +247,7 @@ export class AdminComponent implements OnInit {
         name: this.createChannelModal.name,
       });
 
-      // this.httpClient
-      //     .post('http://localhost:8080/api/createChannel', {
-      //       channelName: this.createChannelModal.name,
-      //     })
-      //     .subscribe((data: any) => {
-      //       if (data.success) {
-      //         // add new channel to list of channels
-      //         const newChannel = data.newChannel;
-
-      //         newChannel.parentGroup = this.groups.find(
-      //           (x:any) => x.id === newChannel.groupId
-      //         );
-
-      //         this.channels.push(newChannel);
-      //       }
-      //     });
-
+     
       this.httpClient.post(serverURL+`api/group/${this.createChannelModal.groupId}/channel`, {
         name: this.createChannelModal.name,
       }).subscribe(data => {
@@ -284,15 +277,8 @@ export class AdminComponent implements OnInit {
         email: this.inviteUserToChannelModel.email,
         channelId: this.inviteUserToChannelModel.channel,
       }).subscribe(data => {
-        debugger;
-        // if (data.user) {
-
-        //   this.users.push(data.user);
-        // }
-      //  this.channels[this.inviteUserToChannelModel.channel.id - 1] = data.channel;
-      //   this.toastr.success('', 'Invite User Success');
-      //   this.inviteUserToChannelModel.name = '';
-      //   this.inviteUserToChannelModel.email = '';
+         ;
+     
       })
     }
   }

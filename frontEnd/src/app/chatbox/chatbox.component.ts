@@ -3,7 +3,10 @@ import {Router} from '@angular/router';
 
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { io } from 'socket.io-client';
+
+import { SocketServiceService } from '../socket-service.service';
 const serverURL = "http://localhost:3000/";
+
 
 @Component({
   selector: 'app-chatbox',
@@ -12,22 +15,40 @@ const serverURL = "http://localhost:3000/";
 })
 export class ChatboxComponent implements OnInit {
 
-  constructor(private router: Router, private httpClient: HttpClient,) { }
+  constructor(private router: Router, private httpClient: HttpClient,private socketService: SocketServiceService) { }
    groups:any;
    loggedInUser:any;
    regGroupObj:any = [];
    channel:any ;
    regchannelObj:any = [] ;
+   isgroupChannelSelected:any = false;
    socket:any;
-   message:string;
+   message:String;
    htmlToAdd:any;
+   messages :any[] = [];
+	connection:any;
+  dateNow : Date = new Date();
+  formatsDateTest: string = 'hh:mm:ss';
 
   ngOnInit(): void {
+     ;
    this.loggedInUser = localStorage.getItem("user");
+   if(this.loggedInUser == null){
+    this.router.navigateByUrl('/login');
+   }
+
     console.log("loggedInUser",this.loggedInUser);
     this.fetchGroup();
     this.setupSocketConnection();
+    this.connection = this.socketService.getMessages().subscribe(message => {
+			this.messages.push(message);
+			this.message = "";
+		});
+
+
   }
+
+
   public fetchGroup(){     
       this.httpClient.get(serverURL+'api/groups').subscribe(data => {
         
@@ -58,14 +79,14 @@ export class ChatboxComponent implements OnInit {
       public selectBasedOngroups(groupId:any){
         
         this.httpClient.get(serverURL+'api/channels').subscribe(data => {
-          debugger;
+           ;
           this.channel = data;
           console.log("this.channel",this.channel)
           for(let i=0;i<=this.channel.length;i++ ){
-            debugger;
+             ;
             if(groupId == this.channel[i].group){
               this.regchannelObj.push(this.channel[i]);
-              debugger
+               
             }
           }
           console.log("this.reggroupObj",this.regGroupObj);
@@ -73,6 +94,17 @@ export class ChatboxComponent implements OnInit {
     
         });
 
+}
+public isabletochatNow(){
+  
+if(this.regchannelObj.length == 0)
+{
+  this.isgroupChannelSelected == false;
+}
+
+else{  
+  this.isgroupChannelSelected = true
+} 
 }
 
 setupSocketConnection() {
@@ -89,20 +121,23 @@ setupSocketConnection() {
    });
 }
 
+
 sendMessage() {
-  debugger;
-  this.socket.emit('message', this.message);
-   const element = document.createElement('li');
-   element.innerHTML = this.message;
-   element.style.background = 'white';
-   element.style.padding =  '15px 30px';
-   element.style.margin = '10px';
-   element.style.textAlign = 'right';
-   console.log(element);
-  // this.htmlToAdd  = element
-  document.getElementById('chatboxchat')!.append(element);
-   this.message = '';
+   ;
+  // Pushes message to socketService & logs datetime + user who sent the message.
+  let date = new Date();
+  let user = JSON.parse(this.loggedInUser).username;
+  //let usernamestr = username.replace(/\"/g, ""));
+  if (this.message == null || this.message === "") {
+    alert('You must enter a message to send something!');
+  } else {
+    this.socketService.sendMessage(user + ":" +this.message );
+    this.message = "";
+  }
 }
 }
+
+
+
 
 

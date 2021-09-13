@@ -3,19 +3,20 @@
       <div>
         <p style="font-size: 30px">dashboard</p>
       </div>
-      <div class="my-groups">
-        <p style="font-size: 18px"> my groups: </p>
-        <p *ngFor="let group of myGroups">
-          {{group.name}}
-        </p>
-      </div>
+      
+    </div>
+    <div class="my-groups">
+      <p style="font-size: 18px"> my groups: </p>
+      <p *ngFor="let group of myGroups">
+        {{group.name}},
+      </p>
     </div>
   
   </div>
   <!-- show groups -->
   <mat-tab-group>
     <!-- super admin  role -->
-    <mat-tab *ngIf="isSuperAdmin()" label="Manage Users">
+    <mat-tab *ngIf="isthisSuperAdmin" label="Manage Users">
       <div *ngFor="let user of a" class="row">
         <p>{{user.name}}</p>
         <p>{{user.id}}</p>
@@ -27,7 +28,7 @@
     </mat-tab>
     <!-- group admin role  -->
       <mat-tab *ngIf="isGroupAdmin()" label="Create Group">
-      <form class="tab-form">
+      <form class="tab-form"> {{isthisSuperAdmin}}
         <mat-form-field>
           <label>
             <input matInput placeholder="Group Name" class="form-control" [(ngModel)]="createGroupModal.name" name="name">
@@ -42,7 +43,7 @@
         <button mat-raised-button color="warn" (click)="removeGroup(group)" style="width: auto;">remove</button>
       </div>
     </mat-tab>
-   <mat-tab *ngIf="isGroupAdmin()" label="Invite User">
+   <mat-tab *ngIf="isGroupAdmin()" label="Invite User to channel">
        <form class="tab-form">
         <mat-label class="blank">Select Group</mat-label>
         <mat-select class="blank">
@@ -95,7 +96,7 @@
         <button mat-raised-button color="primary" (click)="createChannel()" style="width: max-content;">Create Channel</button>
       </form>
     </mat-tab>
-    <mat-tab *ngIf="isGroupAssis()" label="Add User">
+    <mat-tab *ngIf="isGroupAssis()" label="Add User to channel">
       <form class="tab-form">
         <mat-label class="blank">Select Group</mat-label>
         <mat-select class="blank">
@@ -118,7 +119,7 @@
         <button mat-raised-button color="primary" (click)="addUserToChannel()">Add User To Channel</button>
       </form>
    </mat-tab>
-    <mat-tab *ngIf="isGroupAssis()" label="Manage Users">
+    <mat-tab *ngIf="isGroupAssis()" label="Remove user from channel">
       <form class="tab-form">
         <mat-label class="blank">Select Group</mat-label>
         <mat-select class="blank">

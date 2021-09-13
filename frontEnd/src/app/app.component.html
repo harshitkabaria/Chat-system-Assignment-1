@@ -7,7 +7,7 @@
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2">
+    <a class="navbar-brand me-2" routerLink="/dashboard">
       <img
         src="../assets/logo.png"
         height="30"
@@ -42,19 +42,20 @@
 
       <div class="d-flex align-items-center">
 
-        <button type="button" (click)="logout()" class="btn btn-link px-3 me-2" *ngIf="isLoggedin">
-           Logout
-        </button>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-           Admin
+      
+        <button type="button" routerLink="/addUser" class="btn px-3 me-2" *ngIf="isLoggedin" style="cursor: pointer;">
+          Add User
+       </button>
+      
+          <button class="btn px-3 me-2 " type="button" routerLink="/dashboard" style="cursor: pointer;">
+           Admin Dashboard
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" routerLink="/addUser">Add User</a></li>
-            <li><a class="dropdown-item" routerLink="/addGroup">Add group</a></li>
-            <li><a class="dropdown-item" routerLink="/addChannel">Add channel</a></li>
-          </ul>
-        </div>
+          
+      
+
+        <button type="button" (click)="logout()" class="btn px-3 me-2" *ngIf="isLoggedin" style="cursor: pointer;">
+          Logout
+       </button>
       
       </div>
     </div>

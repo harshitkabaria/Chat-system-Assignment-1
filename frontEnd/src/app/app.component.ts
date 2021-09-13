@@ -14,8 +14,7 @@ export class AppComponent {
 
 
   ngOnInit(): void {
-    debugger
-    console.log("hello",sessionStorage);
+     
 		if (localStorage.getItem('user') != null) {
       this.isLoggedin = true;
 		}
@@ -25,7 +24,6 @@ export class AppComponent {
       this.router.navigateByUrl('/login');
     
     }
-    
  }
  public logout(){   
   localStorage.removeItem('user');
